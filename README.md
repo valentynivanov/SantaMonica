@@ -1,5 +1,4 @@
 # Santa Monica
-#### Video Demo:  <[URL HERE](https://youtu.be/9I3WQC3JRm4)>
 #### Description:
 My final project is a web-based application developed using Flask, JavaScript, Python, HTML, CSS, Bootstrap, and SQL.
 
