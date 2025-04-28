@@ -1,0 +1,335 @@
+TO DO:
+
+- Add payment method cash or card
+
+- Don't forget to delete confidentional info before submit
+- Record a video
+
+
+
+
+
+For future: - Add drop-menu for Home and Menu tabs
+
+
+     function checkPostcode(postcode) {
+                                const manchesterPostcodes = ["M1","M11","M12","M13","M14","M15","M16","M17","M18","M19","M2","M20","M21","M22","M23","M24","M25","M26","M27","M28","M29","M3","M30","M31","M32","M33","M34","M35","M38","M4","M40","M41","M42","M43","M44","M45","M46","M5","M6","M60","M7","M8","M9","M90"];
+                                const addressFields = document.getElementById("address-fields");
+                                if (!manchesterPostcodes.some(code => postcode.startsWith(code))) {
+                                    alert("You can collect your order from our address only.");
+                                    addressFields.style.display = "none";
+                                } else {
+                                    addressFields.style.display = "block";
+                                }
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backend:
+- Add option to increase/decrease items in shopping cart
+- Add flash notification when adding items
+- Add flash notification when removing items and page not to refresh
+- Logout to only showing when you logged
+- If you want to procced you need to be logged or to register
+- Create a fucntion to send e-mail confirmation of order
+
+
+Frontend:
+
+Website is designed for pizzeria restauraunt only
+You visit website to choose pizza you want and extra snack/drink
+When you procced to checkout you have two options: collect on site or delivery
+
+- Add more pizzas
+- Use same font for all page
+- Add more products for pizzeria
+- Add background color
+- Add background picture
+- Add tabs about with brief description, contacts with e-mail, phone, google showing address
+- Fix shopping cart list-group
+- Create main page, move pizzas on different menu page
+
+
+
+
+@app.route('/remove-from-cart/<int:product_id>', methods=['GET','POST'])
+def remove_from_cart(product_id):
+    if 'cart' in session and product_id in session['cart']:
+        # Check the current quantity
+        current_quantity = session['cart'][product_id]
+
+        if current_quantity > 1:
+            # Decrease the quantity by 1
+            session['cart'][product_id] -= 1
+        else:
+            # Remove the item from the cart if quantity is 1
+            del session['cart'][product_id]
+
+        # Optionally, you could flash a message to the user
+        flash('Item removed from cart.', 'success')
+
+    return redirect('/cart')
+
+@app.route('/add-to-cart/<int:product_id>', methods=['GET','POST'])
+def add_to_cart(product_id):
+    if 'cart' not in session:
+        session['cart'] = {}  # Initialize cart if it doesn't exist
+
+    if product_id in session['cart']:
+        session['cart'][product_id] += 1  # Increment the quantity
+    else:
+        session['cart'][product_id] = 1  # Add product with quantity 1
+
+    session.modified = True  # Mark session as modified
+
+
+    cart_count = sum(session['cart'].values())
+    return jsonify({"cart_count": cart_count})
+
+
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Shopping Cart
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <h1 class="my-5">Shopping Cart</h1>
+    <ul class="list-group mb-4">
+    {% if cart_items %}
+        {% for item in cart_items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h5 style="width:168.17px; text-align: left;">{{ item.name }}</h5>
+            <img src="{{ url_for('static', filename=item.image_path)}}" class="rounded" style="width:50px;height:50px;">
+            <p>Price: £{{ item.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Subtotal: £{{ (item.price * item.quantity) }}</p>
+            <button type="button" data-product-id="{{ item.id }}" class="btn btn-primary add-to-cart btn-sm">Add to Cart</button>
+            <a href="{{ url_for('remove_from_cart', product_id=item.id) }}" class="btn btn-danger btn-sm">Remove</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <h3>Total: £{{ total_price }}</h3>
+    <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
+</div>
+<form action="{{ url_for('clear_cart') }}" method="post">
+    <p></p>
+    <button type="submit" class="btn btn-danger">Clear Cart</button>
+</form>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+
+
+{% endblock %}
+
+
+
+
+
+let iconCart = document.querySelector('.icon-cart');
+
+iconCart.addEventListener('click', () => {
+    window.location.href = '/cart';
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listener for "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();  // Prevent the default anchor behavior
+
+            const productId = this.getAttribute('data-product-id');  // Get product ID
+
+            // Send the AJAX request to add the product to the cart
+            fetch(`/add-to-cart/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the cart count in the page dynamically
+                const cartCountElement = document.getElementById('cart-count');
+                if (cartCountElement) {
+                    cartCountElement.textContent = data.cart_count;
+                }
+            })
+            .catch(error => console.error('Error adding to cart:', error));
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul class="list-group list-group-horizontal-sm">
+            <li class="list-group-item flex-fill" style="">{{ item.name }}</li>
+            <li class="list-group-item flex-fill">
+                <img src="{{ url_for('static', filename=item.image_path)}}" class="rounded" style="width:50px;height:50px;">
+            </li>
+            <li class="list-group-item flex-fill">Price: £{{ item.price }}</li>
+            <li class="list-group-item flex-fill">Quantity: {{ item.quantity }}</li>
+            <li class="list-group-item flex-fill">Subtotal: £{{ (item.price * item.quantity) }}</li>
+            <li class="list-group-item flex-fill">
+                <a href="{{ url_for('remove_from_cart', product_id=item.id) }}" class="btn btn-danger btn-sm">Remove</a>
+            </li>
+        </ul>
+
+
+UPDATE products SET category = 'pizza' WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8);
+UPDATE products SET category = 'drink' WHERE id IN (9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
+
+
+
+
++----+------------------+-------+-----------------------+--------------------------------------------------------------------------------------------+
+| id |       name       | price |      image_path       |                                        description                                         |
++----+------------------+-------+-----------------------+--------------------------------------------------------------------------------------------+
+| 1  | Pepperoni pizza  | 10.0  | images/pepperoni.jpg  | Salami, Tomato, Mozzarella, Paprika                                                        |
+| 2  | Chesse pizza     | 12.0  | images/chesse.webp    | Mozzarella, Cheddar, Brie, Blue Cheese, Tomato                                             |
+| 3  | Margherita pizza | 9.0   | images/margherita.jpg | Tomato sauce & Mozzarella                                                                  |
+| 4  | Meat pizza       | 15.0  | images/meat.jfif      | Pepperoni, Ham, Chorizo, Pork meatballs and Smoked bacon rashers                           |
+| 5  | BBQ pizza        | 14.0  | images/bbq.jpg        | BBQ chicken, Mozzarella, Pepperoni, Ground beef, Bacon on a BBQ sauce base                 |
+| 6  | Caesar pizza     | 8.0   | images/caesar.jpg     | Parmesan chesse, Chicken, Tomato, Romaine lettuce, Italian seasoning topped with olive oil |
++----+------------------+-------+-----------------------+--------------------------------------------------------------------------------------------+
+
+
+INSERT INTO products (name, price , image_path, description)
+VALUES ('Coca-Cola Classic' , '3','images/coke_classic.jpg', '500ml bottle'),
+('Diet Coke' , '2.5','images/diet_coke.jpg', '500ml bottle'),
+('Coca-Cola Zero Sugar' , '2.5','images/zero_coke.jpg', '500ml bottle'),
+('Fanta Orange' , '3','images/fanta.jpg', '500ml bottle'),
+('Dr Pepper' , '3','images/dr_pepper.jpg', '500ml bottle'),
+('Sprite' , '3','images/sprite.jpg', '500ml bottle'),
+('7UP Zero Sugar Lemon & Lime' , '2.5','images/7up_zero.jpg', '500ml bottle'),
+('Lipton Ice Tea Peach Flavoured' , '3','images/lipton_peach.jpg', '500ml bottle'),
+('Lipton Ice Tea Lemon' , '3','images/lipton_lemon.jpg', '500ml bottle'),
+('Evian Still Water' , '2','images/evian.jpg', '500ml bottle');
+
+
+
+INSERT INTO products (name, price , image_path, description)
+VALUES ('Hawaiian pizza' , '15','images/hawaiian_pizza.jpg', 'Ham, Pineapple, Mushrooms with tomato sauce'),
+('New York pizza' , '20','images/new_york_pizza_1.webp', '16" NYC-style pizza: Tomato, Mozzarella, Pepperoni. 6 foldable slices.');
+
+
+INSERT INTO products (name, price , image_path, description, category)
+VALUES ('French Fries' , '4','images/fries.jpg', 'A portion of perfectly crispy, golden fries', 'side'),
+('Potato Wedges' , '6','images/potato_wedges.jpg', 'Seasoned and baked to perfection potato wedges', 'side'),
+('Chicken Wings' , '6','images/chicken_wings.jpg', '7 Chicken wings coated in a medium spicy BBQ sauce', 'side'),
+('Chicken Nuggets' , '6','images/chicken_nuggets.jpg', '7 Chicken nuggets in a mildly spicy, crispy coating', 'side');
+
+
++----+------------------+-------+-----------------------+
+| id |       name       | price |      image_path       |
++----+------------------+-------+-----------------------+
+| 1  | Pepperoni pizza  | 10.0  | images/pepperoni.jpg  |
+| 2  | Chesse pizza     | 12.0  | images/chesse.webp    |
+| 3  | Margherita pizza | 9.0   | images/margherita.jpg |
+| 4  | Meat pizza       | 15.0  | images/meat.jfif      |
+| 5  | BBQ pizza        | 14.0  | images/bbq.jpg        |
+| 6  | Caesar pizza     | 8.0   | images/caesar.jpg     |
++----+------------------+-------+-----------------------+
+
+UPDATE products
+SET image_path = CASE
+    WHEN id = 1 THEN 'images/pepperoni.jpg'
+    WHEN id = 2 THEN 'images/chesse.webp'
+    WHEN id = 3 THEN 'images/margherita.jpg'
+    WHEN id = 4 THEN 'images/meat.jfif'
+    WHEN id = 5 THEN 'images/bbq.jpg'
+    WHEN id = 6 THEN 'images/caesar.jpg'
+    ELSE image_path
+END;
+
+UPDATE products
+SET description = CASE
+    WHEN id = 1 THEN 'Salami, Tomato, Mozzarella, Paprika'
+    WHEN id = 2 THEN 'Mozzarella, Cheddar, Brie, Blue Cheese, Tomato'
+    WHEN id = 3 THEN 'Tomato sauce & Mozzarella'
+    WHEN id = 4 THEN 'Pepperoni, Ham, Chorizo, Pork meatballs and Smoked bacon rashers'
+    WHEN id = 5 THEN 'BBQ chicken, Mozzarella, Pepperoni, Ground beef, Bacon on a BBQ sauce base'
+    WHEN id = 6 THEN 'Parmesan chesse, Chicken, Tomato, Romaine lettuce, Italian seasoning topped with olive oil'
+    ELSE description
+END;
+
+alert in index.html
+
+  <script>
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+
+                const productId = this.dataset.productId;
+
+                fetch(`/add-to-cart/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Create the alert div
+                        const alertDiv = document.createElement('div');
+                        alertDiv.className = 'alert alert-primary text-center';
+                        alertDiv.setAttribute('role', 'alert');
+                        alertDiv.innerText = data.message;
+
+                        // Style the alert to span the full width of the page
+                        alertDiv.style.position = 'fixed';
+                        alertDiv.style.top = '57px';
+                        alertDiv.style.height = '50px';
+                        alertDiv.style.left = '0';
+                        alertDiv.style.width = '100%';
+                        alertDiv.style.zIndex = '1050';
+
+                        // Add the alert to the header or body
+                        document.body.prepend(alertDiv);
+
+                        // Optional: Remove the alert after a few seconds
+                        setTimeout(() => {
+                            alertDiv.remove();
+                        }, 3000); // Adjust the timeout duration (in milliseconds)
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+
+    </script>

@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Menu
+{% endblock %}
+
+
+{% block main %}
+         <!-- Pizzas -->
+<div class="container py-5">
+    <div class="container text-center">
+        <h1 class="mb-4">Pizza</h1>
+    </div>
+        <div class="container text-center">
+            <div class="row row-cols-xxl-4 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-2 align-items-center gy-3">
+                {% for product in pizzas %}
+                <div class="col" id="pizza_col">
+                    <div class="box rounded-2">
+                        <div class="back_col" style="display: {{ 'block' if quantities.get(product.id, 0) > 0 else 'none' }};"></div>
+                        <img src="{{ url_for('static', filename=product.image_path)}}" class="rounded product_image">
+                        <div class="details">
+                            <h2 class="product_name">{{ product.name }}</h2>
+                            <p class="description">{{ product.description }}</p>
+                            <h4 class="product_price">£{{ product.price }}</h4>
+                        </div>
+                        <span class="span_index" id="product-quantity-{{ product.id }}" style="display: {{ 'inline-block' if quantities.get(product.id, 0) > 0 else 'none' }};">
+                            x{{ quantities.get(product.id, 0) or 0 }}
+                        </span>
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-success add-to-cart" style="margin-bottom:15px;" data-product-id="{{ product.id }}">Add to Cart</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+                <!-- Sides -->
+        <div class="container text-center m-2 p-2">
+            <h1 class="mb-4 mt-4">Sides</h1>
+        </div>
+        <div class="container text-center">
+            <div class="row row-cols-xxl-4 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-2 align-items-center gy-3">
+                {% for product in sides %}
+                <div class="col" id="pizza_col">
+                    <div class="box rounded-2">
+                        <div class="back_col" style="display: {{ 'block' if quantities.get(product.id, 0) > 0 else 'none' }};"></div>
+                        <img src="{{ url_for('static', filename=product.image_path)}}" class="rounded product_image">
+                        <div class="details">
+                            <h2 class="product_name">{{ product.name }}</h2>
+                            <p class="description">{{ product.description }}</p>
+                            <h5 class="product_price">£{{ product.price }}</h5>
+                        </div>
+                        <span class="span_index" id="product-quantity-{{ product.id }}" style="display: {{ 'inline-block' if quantities.get(product.id, 0) > 0 else 'none' }};">
+                            x{{ quantities.get(product.id, 0) or 0 }}
+                        </span>
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-success add-to-cart" style="margin-bottom:15px;" data-product-id="{{ product.id }}">Add to Cart</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+            <!-- Drinks -->
+        <div class="container text-center m-2 p-2">
+            <h1 class="mb-4 mt-4">Drinks</h1>
+        </div>
+        <div class="container text-center">
+            <div class="row row-cols-xxl-4 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-2 align-items-center gy-3">
+                {% for product in drinks %}
+                <div class="col" id="pizza_col">
+                    <div class="box rounded-2">
+                        <div class="back_col" style="display: {{ 'block' if quantities.get(product.id, 0) > 0 else 'none' }};"></div>
+                        <img src="{{ url_for('static', filename=product.image_path)}}" class="rounded product_image_drinks">
+                        <div class="details">
+                            <h2 class="product_name">{{ product.name }}</h2>
+                            <p class="description_drinks">{{ product.description }}</p>
+                            <h5 class="product_price">£{{ product.price }}</h5>
+                        </div>
+                        <span class="span_index" id="product-quantity-{{ product.id }}" style="display: {{ 'inline-block' if quantities.get(product.id, 0) > 0 else 'none' }};">
+                            x{{ quantities.get(product.id, 0) or 0 }}
+                        </span>
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-success add-to-cart" style="margin-bottom:15px;" data-product-id="{{ product.id }}">Add to Cart</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <a href="/cart" class="menu-button">GO TO SHOPPING CART</a>
+</div>
+{% endblock %}
+
+

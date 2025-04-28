@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shopping Cart
+{% endblock %}
+
+{% block main %}
+<div class="container py-5">
+    <div class="container text-center justify-content-center align-items-center">
+        <h1 class="my-5">Shopping Cart</h1>
+        <ul class="list-group mb-4" id="cart-items-list">
+        {% if cart_items %}
+            {% for item in cart_items %}
+            <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center" id="cart-item-{{ item.id }}">
+                <h2 class="cart_product_name">{{ item.name }}</h2>
+                <img src="{{ url_for('static', filename=item.image_path)}}" class="rounded cart_image">
+                <p>Price: £{{ item.price }}</p>
+                <p>Quantity: <span class="item-quantity">{{ item.quantity }}</span></p>
+                <p>Subtotal: £<span class="item-subtotal">{{ item.price * item.quantity }}</span></p>
+                <button type="button" data-product-id="{{ item.id }}" class="btn btn-success add-to-cart btn-sm">Add</button>
+                <button type="button" data-product-id="{{ item.id }}" class="btn btn-danger remove-from-cart btn-sm">Remove</button>
+            </li>
+            {% endfor %}
+        </ul>
+        <h3 class="total_price">Total: £<span id="total-price">{{ total_price }}</span></h3>
+        <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
+        <p></p>
+        <form action="{{ url_for('clear_cart') }}" method="post">
+            <button type="submit" class="btn btn-danger">Clear Cart</button>
+        </form>
+    </div>
+
+    {% else %}
+    <p class="p_cart">Your cart is empty.</p>
+    <a href="/menu" class="cart-button">VIEW MAIN MENU</a>
+    {% endif %}
+</div>
+{% endblock %}

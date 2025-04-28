@@ -1,0 +1,688 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html, body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Push the footer to the bottom */
+}
+
+body{
+    font-family: 'Jost', sans-serif;
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Nav menu section */
+
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 80px;
+    background: #1c1a1a;
+    z-index: 1000;
+    position: sticky;
+    top:0;
+    left:0;
+    right:0;
+
+}
+
+header a{
+    color:white;
+    text-decoration: none;
+}
+
+.nav-branding {
+    font-size: 40px;
+    font-weight: bold;
+    margin-right: 30px;
+    color:white;
+}
+.navbar{
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item{
+    list-style:none;
+    padding: 0 20px;
+    position:relative;
+}
+
+.nav-link{
+    text-decoration:none;
+    font-size:20px;
+    color:white;
+    transition: 0.3s ease;
+    cursor:pointer;
+    position: relative;
+}
+
+.nav-link.active,
+.nav-link:hover{
+    color:#088178 !important;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after{
+    content: "";
+    display: block; /* Ensures the pseudo-element is visible */
+    width: 60%; /* Adjust width to fit text */
+    height: 2px; /* Ensure height is consistent */
+    background: #088178;
+    position: absolute;
+    bottom: -4px; /* Position it just below the link text */
+    left: 0; /* Centers the underline */
+    transition: width 0.3s ease; /* Optional for smooth animation */
+}
+
+
+.icon-cart {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.cart-count {
+    display: flex;
+    min-width: 20px;
+    min-height: 20px;
+    background-color: rgb(200, 16, 46);
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: -10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hamburger-menu {
+    display:none;
+    cursor:pointer;
+}
+
+.bar {
+    display:block;
+    width:25px;
+    height:3px;
+    margin:5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color:white;
+}
+
+/* Home page section */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    overflow: hidden; /* Ensures no overflow */
+  }
+
+/* container py-5
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+*/
+
+  .hero-section img.home_image {
+    display: block;
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers the area */
+    position: relative;
+    z-index: 0; /* Ensures it stays at the base layer */
+  }
+
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    /* background: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
+    padding: 1rem;
+    border-radius: 10px; /* Optional: Rounded corners */
+    z-index: 2; /* Ensures it appears above the background shadow */
+  }
+
+  .hero-text h2 {
+    padding-top:40px;
+    padding-bottom:40px;
+    font-size:50px;
+    margin: 0.5rem 0;
+  }
+
+  .hero-button{
+    display: inline-block; /* Enables width/height styling */
+    font-weight: bold;
+    max-width: 200px;
+    max-height: 50px;
+    padding: 0.5rem 1rem; /* Adjust padding for desired size */
+    color: white !important;
+    background: #1c1a1a;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    z-index: 2; /* Ensures it appears above the background */
+  }
+
+  .hero-button:hover {
+    background: #444; /* Add hover effect */
+    }
+
+.welcome{
+    font-style:italic;
+    width:100%;
+    padding-top:40px;
+    padding-bottom:40px;
+    background:none;
+    font-size:100px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    /* text-shadow:
+    -1px -1px 0 black, /* Top-left */
+     1px -1px 0 black, /* Top-right */
+    -1px  1px 0 black, /* Bottom-left */
+     1px  1px 0 black; /* Bottom-right */
+     z-index: 2; /* Ensures it appears above the background */
+}
+
+.back {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensures it covers the image but is beneath text */
+    pointer-events: none; /* Prevents it from blocking clicks */
+    box-sizing: border-box; /* Ensures it aligns with the parent container */
+}
+
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .content {
+    flex: 1;
+    max-width: 50%; /* Ensure the content takes half the width */
+  }
+
+  .home img {
+    flex: 1;
+    max-width: 50%; /* Ensure the image takes half the width */
+    height: auto;
+    object-fit: cover; /* Ensures images look good */
+    margin-left: 20px; /* Space between image and content */
+  }
+
+  .wine {
+    flex: 1;
+    max-width: 50%; /* Ensure the image takes half the width */
+    height: auto;
+    object-fit: cover; /* Ensures images look good */
+    margin-right: 20px; /* Space between image and content */
+  }
+
+ .content h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+ .content p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .content button {
+    font-weight:bold;
+    max-width:200px;
+    max-height:50px;
+    color:#1c1a1a;
+    background: #1c1a1a;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .content button a {
+    text-decoration: none;
+    color: white !important;
+  }
+
+  .email {
+    color:#1c1a1a;
+    text-decoration:none;
+  }
+  .email:hover {
+    color:#088178;
+  }
+
+/* Menu page section */
+
+.item-name {
+    max-width: 150px; /* Adjust as needed */
+    margin: 0; /* Avoid extra margin/padding */
+}
+
+.product_name {
+    display: -webkit-box;
+    /* overflow: hidden; */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 18px;
+    margin: 4px 0px 8px;
+    min-height: calc(18px* 2);
+}
+.product_image{
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 7 / 5;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+/* Control the height and consistency of product boxes */
+.details {
+    display:flex;
+    flex-direction:column;
+    padding:10px;
+    gap:10px;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+
+}
+
+.product_price {
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    color: rgb(102, 102, 102);
+    line-height: 18px;
+    margin: 4px 0px 8px;
+    min-height: calc(18px * 4);
+}
+
+.total_price {
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.cart_product_name{
+    width:20%;
+    text-align:left;
+    font-weight: 700;
+}
+
+#cart-items-list p{
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    margin:0;
+}
+
+
+#cart-items-list button,
+.btn-success,
+.btn-danger{
+    font-size: 20px;
+}
+
+
+.span_index {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(200, 16, 46);
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 14px; /* Optional: Make sure the content fits nicely */
+    transition: 0.2s ease;
+}
+
+#pizza_col {
+    position: relative; /* Ensure .span_index positions relative to this container */
+}
+
+.box.rounded-2{
+    background:white;
+    position: relative; /* To position .back_col relative to this container */
+    cursor:pointer;
+    transition: 0.2s ease;
+    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.3); /* To create shadow */
+    border: 1px solid #404345;
+}
+
+
+.box.rounded-2:hover {
+    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.5); /* To create shadow, when hover, so it's looks like selected item */
+}
+
+.back_col{
+    width: 12px;
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+    background-color: rgb(200, 16, 46);
+    margin-left: -4px;
+    padding: 8px 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0; /* Ensures it spans the full height of the parent */
+    transition: 0.2s ease;
+}
+
+.product_image_drinks{
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    object-fit: cover;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.description_drinks {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: rgb(102, 102, 102);
+    margin: 4px 0px 8px;
+}
+
+.cart_image{
+    max-width: 10%;
+    height: auto;
+    aspect-ratio: 1;
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    object-fit: cover;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+
+/* About us section */
+
+#about{
+    font-weight:350;
+    font-size: 20px;
+    color: #1a1a11;
+    line-height: 25px;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+    text-align: left;
+}
+
+#about h5 {
+    font-weight:500;
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.about_img {
+    flex: 1;
+    max-width: 100%; /* Ensure the image takes half the width */
+    height: auto;
+    object-fit: cover; /* Ensures images look good */
+    margin: 10px; /* Space between image and content */
+    width:100%;
+}
+
+/* Contact us section */
+
+#contact_us .home {
+    border-top: 1px solid #ccc;
+}
+
+#contact_us p{
+    font-weight:350;
+    font-size: 20px;
+    color: #1a1a11;
+    line-height: 25px;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+    text-align: left;
+}
+
+#contact_us a{
+    color:#1c1a1a;
+    text-decoration:none;
+}
+
+#contact_us a:hover{
+    color:#088178;
+}
+
+/* Checkout section */
+
+.price_checkout{
+    display:flex;
+    justify-content:center;
+}
+
+.total_price_checkout {
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.icons{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.menu-button{
+    display: block; /* Centers horizontally */
+    margin: 30px auto; /* Adds vertical margin to push away from other content */
+    font-weight: bold;
+    max-width: 200px;
+    max-height: 60px;
+    padding: 0.5rem 1rem; /* Adjust padding for desired size */
+    color: white !important;
+    background: #1c1a1a;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+  }
+
+.menu-button:hover {
+    background: #444; /* Add hover effect */
+    }
+
+.p_cart{
+    margin-bottom: 200px;
+}
+
+.cart-button{
+    display: block; /* Centers horizontally */
+    margin: 50px auto 200px auto; /* Adds vertical margin to push away from other content */
+    font-weight: bold;
+    max-width: 200px;
+    max-height: 50px;
+    padding: 0.5rem 1rem; /* Adjust padding for desired size */
+    color: white !important;
+    background: #1c1a1a;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+  }
+
+.cart-button:hover {
+    background: #444; /* Add hover effect */
+    }
+
+.success-button {
+    display: block; /* Centers horizontally */
+    margin: 50px auto 50px auto; /* Adds vertical margin to push away from other content */
+    font-weight: bold;
+    max-width: 200px;
+    max-height: 50px;
+    padding: 0.5rem 1rem; /* Adjust padding for desired size */
+    color: white !important;
+    background: #1c1a1a;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+}
+
+.success-button:hover {
+    background: #444; /* Add hover effect */
+    }
+
+.success-text{
+    margin: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.fail-button {
+    display: block; /* Centers horizontally */
+    margin: 50px auto 50px auto; /* Adds vertical margin to push away from other content */
+    font-weight: bold;
+    max-width: 200px;
+    max-height: 50px;
+    padding: 0.5rem 1rem; /* Adjust padding for desired size */
+    color: white !important;
+    background: #1c1a1a;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+}
+
+.fail-button:hover {
+    background: #444; /* Add hover effect */
+    }
+
+.fail-text{
+    margin: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Footer section */
+
+footer {
+    background: #1c1a1a;
+    padding: 20px;
+    margin-top: auto;/* Ensures it stays at the bottom */
+}
+
+footer .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Space between columns */
+}
+
+footer .col {
+    flex: 1 1 300px; /* Minimum width for columns */
+}
+
+footer div{
+    color:white;
+}
+
+.icon{
+    position:relative;
+    cursor: pointer;
+    font-size: 50px;
+    align-content: space-between;
+}
+
+footer a{
+    text-decoration:none;
+    transition: 0.3s ease;
+    color:white;
+}
+
+footer  a:hover{
+    color:#088178;
+}
+
+footer a:hover::after{
+    content:"";
+    background:#088178;
+}
+
+.copyright {
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    text-align:center;
+    width:100%;
+    margin-top: 20px;
+}
+
+

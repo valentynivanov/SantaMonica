@@ -1,0 +1,262 @@
+/* Media Queries */
+
+@media (max-width:1210px){
+    .welcome {
+        font-size:80px;
+
+    }
+    .hero-text h2{
+        font-size:45px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .hamburger-menu{
+        display:block;
+    }
+
+    .hamburger-menu.active .bar:nth-child(2){
+        opacity:0;
+    }
+    .hamburger-menu.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-menu.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    .nav-menu {
+        position:fixed;
+        left:-100%;
+        top: 70px;
+        gap:0;
+        flex-direction:column;
+        background-color:#262626;
+        width:100%;
+        text-align: center;
+        transition: 0.3s ;
+    }
+    .nav-item{
+        margin:16px 0;
+    }
+    .nav-menu.active{
+        left:0;
+    }
+    .welcome {
+        font-size:80px;
+
+    }
+    .hero-text h2{
+        font-size:40px;
+
+    }
+    .cart_product_name{
+        font-size: 25px;
+    }
+    #cart-items-list button,
+    .btn-success,
+    .btn-danger{
+    font-size: 15px;
+    }
+    .cart_image{
+        max-width: 7%;
+    }
+    #cart-items-list p {
+        font-size: 17px;
+    }
+}
+
+@media (max-width:980px){
+    .hero-text h2{
+        font-size:35px;
+    }
+}
+
+@media (max-width:865px){
+    .welcome {
+        font-size:70px;
+
+    }
+    .hero-text h2{
+        font-size:30px;
+        padding-top:20px;
+        padding-bottom:20px;
+
+    }
+    .cart_product_name{
+        font-size: 20px;
+    }
+    #cart-items-list p {
+        font-size: 15px;
+    }
+    #cart-items-list button,
+    .btn-success,
+    .btn-danger{
+    font-size: 12px;
+    }
+}
+
+@media (max-width:769px){
+    .cart_product_name{
+        font-size: 30px !important;
+        width:100%;
+        text-align: center;
+    }
+    #cart-items-list p {
+        font-size: 20px;
+    }
+    #cart-items-list button,
+    .btn-success,
+    .btn-danger{
+    font-size: 15px;
+    }
+    #cart-items-list .list-group-item {
+        flex-direction: column;
+        align-items: flex-start; /* Adjust alignment for column layout */
+    }
+
+    #cart-items-list .cart_image {
+        width: 100%;
+        max-width: 200px; /* Adjust as needed */
+        height: auto;
+        margin-bottom: 1rem; /* Add space below image */
+    }
+
+    #cart-items-list h2,
+    #cart-items-list p,
+    #cart-items-list button {
+        margin-bottom: 0.5rem; /* Add spacing between elements */
+    }
+    .p_cart{
+        margin-bottom:0;
+    }
+    .cart-button{
+        margin: 30px auto;
+    }
+}
+
+@media (max-width:750px){
+    .welcome {
+        font-size:60px;
+
+    }
+    .hero-text h2{
+        font-size:25px;
+    }
+}
+
+@media (max-width:630px){
+    .welcome {
+        font-size:50px;
+    }
+    .hero-text h2{
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+}
+
+@media (max-width:590px){
+    .welcome {
+        font-size:40px;
+    }
+    .hero-text h2{
+        font-size:20px;
+
+    }
+}
+
+@media (max-width:490px) {
+    .welcome {
+        font-size:40px;
+    }
+    .hero-text {
+        padding:0;
+    }
+    .hero-text h2{
+        font-size:20px;
+        padding:0;
+    }
+    .hero-button {
+        padding: 2.5px 5px;
+        font-size: 12px;
+    }
+
+}
+
+/* iPhone 14 Pro Max */
+@media (max-width: 430px) {
+    .header {
+        padding:10px 10px;
+    }
+    .nav-branding{
+        font-size:30px;
+    }
+    .home{
+        margin:10px;
+        padding:5px;
+    }
+    .hero-section{
+        padding-bottom:10px;
+    }
+    .wine{
+        margin-right:10px;
+    }
+    .home img {
+        margin-left:5px;
+    }
+    .welcome {
+        font-size: 40px;
+        padding:0;
+        margin: 0;
+        margin-bottom:5px;
+    }
+    footer{
+        margin: 0;
+        padding: 0;
+    }
+    .copyright{
+        font-size:12px;
+        padding-top:10px;
+    }
+    .nav-menu {
+        top: 100px;
+    }
+    .container h2 {
+        font-size:25px;
+    }
+    #contact_us p{
+        margin-bottom:10px;
+    }
+    .about_img{
+        margin:0;
+    }
+}
+
+/* iPhone 12 Pro */
+@media (max-width: 390px) {
+    .welcome{
+        font-size:35px;
+    }
+    .hero-text h2 {
+        font-size:18px;
+    }
+    .home {
+        margin:5px;
+
+    }
+    .content h1 {
+        font-size:30px;
+    }
+    .wine {
+        margin-right:10px;
+    }
+    footer{
+        margin:0;
+    }
+    .about_img{
+        margin:0;
+    }
+    #contact_us p {
+        font-size:15px;
+    }
+
+}
