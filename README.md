@@ -1,68 +1,85 @@
-# Santa Monica
-#### Description:
-My final project is a web-based application developed using Flask, JavaScript, Python, HTML, CSS, Bootstrap, and SQL.
+# Santa Monica – Full-Stack Restaurant Ordering System
 
-Santa Monica is a family-owned restaurant website that features essential restaurant pages such as Home, Menu, About, Contact, Shopping Cart, Register, Login, and Logout. A key feature of the website is the shopping cart, allowing users to order pizza within Manchester or opt for collection if their postcode is outside the delivery area.
+A full-stack web application for a family-owned restaurant, designed to support online food ordering with authentication, shopping cart functionality, and order confirmation.
 
-The website is fully responsive and works seamlessly across various devices, including desktop computers, laptops, tablets, and smartphones.
+Built as a production-style project to reflect real restaurant business requirements, including delivery rules, user accounts, and order processing.
 
-Technical Details
+---
 
-I used Flask to create a layout.html template, enabling dynamic reuse of the layout across multiple pages. This approach simplifies development and enhances maintainability. For example, if a user is logged in, the navigation menu dynamically updates to display a Logout option. Other Flask features, such as routing and session management, have also been implemented to handle user interactions effectively.
+## 🔹 Project Overview
 
-Shopping Cart Functionality
+Santa Monica is a responsive restaurant website that allows customers to browse the menu, create an account, add items to a shopping cart, and place orders for delivery or collection.
 
-The shopping cart is the standout feature of the website. Users can choose from categories such as Pizza, Sides, and Drinks to add items to their cart. The number of items in the cart is displayed dynamically on the navigation menu, thanks to JavaScript. This allows for real-time updates without requiring page reloads, improving user experience and optimizing performance. Unlike Flask’s render_template function, which requires reloading the entire page, JavaScript facilitates efficient client-side updates.
+Delivery availability is restricted by postcode, simulating real-world operational constraints. Only authenticated users can complete checkout, ensuring controlled access and data integrity.
 
-All item details, including pictures, descriptions, and prices, are stored in an SQLite3 database. This ensures data consistency and allows for easy updates to the menu.
+---
 
-Checkout Process
+## 🔹 Key Features
 
-Once items are added to the shopping cart, users can proceed to the checkout page. However, only logged-in users can access the checkout. If a user is not logged in, they are redirected to the registration page. Upon successful registration, they are redirected to the login page. Only after logging in can the user proceed to checkout.
+- User registration, login, and session-based authentication  
+- Dynamic shopping cart with real-time updates  
+- Menu items stored and managed via database  
+- Delivery or collection logic based on postcode  
+- Secure checkout flow for authenticated users only  
+- Email order confirmation using server-side email service  
+- Fully responsive design across all devices  
 
-On the checkout page, users must fill out a form with the following details:
+---
 
-- Full Name
-- Email Address
-- Phone Number
-- Delivery Address
+## 🔹 Tech Stack
 
-If the provided postcode is outside Manchester, the user can only select the collection option, as delivery is limited to Manchester. Users can choose to pay by card or cash, and the total order amount is displayed at the bottom of the checkout form before the confirmation button.
+**Frontend**
+- HTML5
+- CSS3
+- Bootstrap
+- JavaScript (Vanilla)
 
-Email Confirmation
+**Backend**
+- Python
+- Flask
+- SQLite
+- Flask-Mail
 
-After placing an order successfully, the user receives an email confirmation, which is implemented using Flask-Mail. For confidentiality, sensitive information such as the email address and password used for the mail server is not disclosed.
+---
 
-Key Features:
+## 🔹 My Role
 
-- Responsive Design: The website is fully responsive and adapts to various screen sizes, providing an optimal user experience on all devices.
+- Designed and developed the application end-to-end  
+- Implemented authentication, session handling, and access control  
+- Built dynamic cart functionality using JavaScript for improved UX  
+- Integrated database-driven menu and order logic  
+- Implemented email notifications for order confirmation  
 
-- Dynamic Navigation: The navigation menu updates based on the user’s authentication status.
+---
 
-- Shopping Cart: Real-time cart updates using JavaScript enhance user experience.
+## 🔹 Architecture Highlights
 
-- Database Integration: Menu items are stored in an SQLite3 database, allowing for easy updates and scalability.
+- Flask templating with a reusable base layout  
+- Session-based authentication with dynamic navigation  
+- Client-side cart updates to reduce unnecessary page reloads  
+- Server-side validation for checkout and delivery logic  
 
-- Checkout Validation: Only registered and logged-in users can complete the checkout process.
+---
 
-- Email Notifications: Order confirmations are sent via email, ensuring users receive a record of their transactions.
+## 🔹 Challenges & Learnings
 
-Challenges and Learnings:
+One of the main challenges was implementing a responsive and efficient shopping cart. Early versions relied on server-side rendering, which caused full page reloads. Migrating cart updates to JavaScript significantly improved performance and user experience.
 
-One of the main challenges was implementing the dynamic shopping cart functionality. Initially, I relied heavily on Flask’s render_template for updates, which required reloading the page every time an item was added or removed from the cart. Switching to JavaScript for dynamic updates significantly improved the performance and user experience.
+Another key learning was handling secure email notifications and protecting sensitive configuration data within the backend.
 
-Another challenge was ensuring secure email notifications. Using Flask-Mail required careful handling of credentials and server configurations to maintain security and privacy.
+---
 
-Future Improvements:
+## 🔹 Future Improvements
 
-- Admin Panel: Develop an admin panel for managing menu items and orders directly through the website.
+- Admin dashboard for order and menu management  
+- Online payment gateway integration  
+- Order history and user profiles  
+- Order status tracking  
 
-- Delivery Tracking: Integrate a tracking feature for users to monitor the status of their orders.
+---
 
-- Payment Gateway: Implement a secure payment gateway for online card transactions.
+## 🔹 Notes
 
-- User Profiles: Allow users to save their details and view order history.
+This project was developed as part of the **CS50 final project**, with a focus on building a real-world, full-stack web application rather than a purely academic exercise.
 
-This project demonstrates my ability to develop a full-stack web application, combining frontend and backend technologies to create a user-friendly and functional product. The knowledge gained from this project has strengthened my skills in Flask, database management, JavaScript, and responsive design.
-
-
+It demonstrates practical experience with backend development, authentication, database design, and user-focused frontend functionality.
